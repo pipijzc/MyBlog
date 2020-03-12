@@ -1,27 +1,52 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import store from '../store/index'
 
+const Home = () =>
+    import ('../page/Home/Home.vue')
+const Bug = () =>
+    import ('../page/Home/Bug/Bug.vue')
+const Edit = () =>
+    import ('../page/Edit/Edit.vue')
+const All = () =>
+    import ('../page/Home/All/All.vue')
+const Think = () =>
+    import ('../page/Home/Think/Think.vue')
+const Detail = () =>
+    import ('../components/Detail/Detail.vue')
+    // import Home from '../page/Home/Home.vue'
+    // import Bug from '../page/Home/Bug/Bug.vue'
+    // import Think from '../page/Home/Think/Think.vue'
+    // import Edit from '../page/Edit/Edit.vue'
+    // import Example from '../page/Home/Example/Example.vue'
 Vue.use(VueRouter)
 
-const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
-]
 
 const router = new VueRouter({
-  routes
+    routes: [{
+            path: '/home',
+            component: Home,
+            children: [
+                { path: '/home/bug', component: Bug },
+                { path: '/home/note', component: Bug },
+                { path: '/home/js', component: Bug },
+                { path: '/home/example', component: Bug },
+                { path: '/home/think', component: Think },
+                { path: '/home/all', component: All },
+            ]
+        },
+        { path: '/', redirect: '/home/all' },
+        {
+            path: '/edit',
+            component: Edit,
+
+        },
+        {
+            path: '/detail',
+            component: Detail
+        }
+    ]
 })
+
 
 export default router

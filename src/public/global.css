@@ -1,0 +1,27 @@
+body {
+    background-color: #f0f5f7;
+    min-width: 1300px;
+}
+
+.ql-editor .maincontent p>img,
+.el-image__inner {
+    display: block!important;
+    width: 95%!important;
+    border-radius: 20px!important;
+    margin: 0 auto!important;
+    box-shadow: 2px -1px 8px rgba(0, 0, 0, 0.2)!important;
+}
+
+.el-dialog {
+    border-radius: 30px!important;
+}
+
+.el-dialog__body {
+    text-align: center!important;
+    /* border-radius: 20px; */
+}
+
+.ql-editor pre {
+    border-radius: 15px!important;
+    box-shadow: 2px -1px 8px rgba(0, 0, 0, .2)!important;
+}
