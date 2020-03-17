@@ -10,9 +10,14 @@ import '../src/public/global.css'
 
 import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css";
+// import 'highlight.js/styles/vs2015.css'
+// import 'highlight.js/styles/atelier-forest-light.css'
+import VueQuillEditor from 'vue-quill-editor'
 import waterfall from 'vue-waterfall2'
-
+import VueParticles from 'vue-particles'
+Vue.use(VueParticles)
 Vue.use(waterfall)
+Vue.use(VueQuillEditor)
 
 
 import axios from 'axios'

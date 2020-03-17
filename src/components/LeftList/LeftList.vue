@@ -1,10 +1,10 @@
 <template>
   <div>
 
-    <div  v-for="(item,index) in newstrs" :key="index">
-    <el-card class="box-card" shadow="hover">  
+    <div  v-for="(item,index) in newstrs" :key="index" >
+    <el-card class="box-card" shadow="hover" >  
       <div class="ui label">
-        <a>{{item.category}}</a>
+        <a style="cursor: pointer;" @click="jump(item.category)">{{item.category}}</a>
       </div>
        <span class="s-round-date">
                 <span class="month" v-html=" item.date.split('-')[1] +'月'"></span>
@@ -51,6 +51,30 @@ export default {
     // 点击显示更多
     addMoreFun() {
       this.$store.dispatch('addmore')
+    },
+    jump(category){
+      switch(category) {
+        case '杂项': 
+        this.$store.dispatch('readData','note');
+        this.$router.push('/home/note');
+        break;
+
+        case 'Js笔记': 
+        this.$store.dispatch('readData','js')
+        this.$router.push('/home/js');
+        break;
+
+        case '案例': 
+        this.$store.dispatch('readData','example')
+        this.$router.push('/home/example');
+        break;
+
+        case 'Bug思路': 
+        this.$store.dispatch('readData','bug')
+        this.$router.push('/home/bug');
+        break;
+      }
+      
     }
   },
   mounted() {
@@ -63,6 +87,8 @@ export default {
 
     newstrs(){
       const {strs} = this
+      console.log(strs);
+      
       strs.forEach(item=>{
           if (item.category == 'note') {
             item.category = '杂项'
@@ -81,9 +107,10 @@ export default {
     // 监听state数据中strs的变化
     strs(){
       // console.log(this.strs.length); 
-      if (this.strs.length % 5 !== 0) {
+        if (this.strs.length % 5 !== 0 || this.$store.state.isInput) {
         this.hasMore = false
-      }   
+      } 
+     
     }
   }
 };
@@ -91,6 +118,7 @@ export default {
 
 <style scoped>
 .box-card {
+
   position: relative;
   border-radius: 20px;
   margin-top: 150px;

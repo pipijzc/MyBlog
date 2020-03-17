@@ -20,7 +20,12 @@
                 <i class="el-icon-time"></i>
                 <span>时间:{{item.date? item.date:'猴年马月'}}</span>
               </div>
-              <div v-html="item.str" class="maincontent"></div>
+              <div v-html="item.introduct" class="maincontent"></div>
+            </div>
+             <div class="viewdetail">
+                <a class="tcolors-bg" :href="'#/detail?id='+ item._id" target="_blank">
+                    阅读全文>>
+                </a>
             </div>
           </div>
         </el-card>
@@ -104,5 +109,49 @@ export default {
 .ql-container.ql-snow {
   border: 0;
 }
+a {
+  color: #fff;
+  text-decoration: none;
+}
+ .viewmore{
+    text-align: center;
+    width:100%;
+}
+ .viewmore a{
+     background:  #97dffd;
+    padding:6px 0; 
+    border-radius: 10px;
+  text-decoration: none;
+    text-align: center;
+    font-size: 14px;
+    color:#fff;
+    height:30px;
+    line-height: 30px;
+    display: block;
+    margin-top: 10px;
+}
+ .viewdetail{
+    margin:10px 0 ;
+    line-height: 24px;
+    text-align: center;
+}
+.viewdetail a{
+    color:#fff;
+    font-size: 12px;
+    padding:5px 10px;
+    border-radius: 10px;
+    /* margin-top: 10px; */
+    margin-top: 10px;
 
+}
+.tcolors-bg{
+    background:#97E09C;
+    transition: all .3s ease-in;
+}
+.tcolord-bg{
+    background: #48456D;
+}
+.tcolors-bg:hover{
+    background: #48456D;
+}
 </style>

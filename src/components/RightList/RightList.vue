@@ -1,14 +1,33 @@
 <template>
   <div>
     <!-- 点星星 -->
-    <el-card class="box-card">
+    <el-card class="box-card star">
       <section :class="fixDo?'rs2 fixed':'rs2'" @click="lovemeFun">
+          <vue-particles
+        color="#97dffd"
+        :particleOpacity="0.9"
+        :particlesNumber="150"
+        shapeType="circle"
+        :particleSize="8"
+        linesColor="#97dffd"
+        :linesWidth="1"
+        :lineLinked="false"
+        :lineOpacity="0.3"
+        :linesDistance="10"
+        :moveSpeed="9"
+        :hoverEffect="true"
+        hoverMode="grab"
+        :clickEffect="true"
+        clickMode="push"
+      >
+      </vue-particles>
         <p>这个阔以点~😊😊😊</p>
-        <div class>
+        <div class>  
           <i :class="loveme?'heart active':'heart'"></i>
           <span>{{likeNum}}</span>
         </div>
       </section>
+     
     </el-card>
     <!-- 回到顶部组件 -->
     <Scroll :imageSrc="require('../../images/scroll.png')"></Scroll>
@@ -74,6 +93,17 @@ export default {
 
 <style scoped>
 @import "../../public/set_4.css";
+.particles-js-canvas-el {
+  position: fixed;
+  /* top: 0!important; */
+  z-index: 9999;
+  /* width: 400px!important; */
+  /* height: 400px!important; */
+}
+.star {
+  cursor: pointer;
+}
+
 /*************do you like me*******************/
 .rs2 {
   /*padding:10px 0 4px 0;*/

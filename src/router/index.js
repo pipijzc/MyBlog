@@ -10,15 +10,15 @@ const Edit = () =>
     import ('../page/Edit/Edit.vue')
 const All = () =>
     import ('../page/Home/All/All.vue')
-const Think = () =>
-    import ('../page/Home/Think/Think.vue')
+    // const Think = () =>
+    //     import ('../page/Home/Think/Think.vue')
 const Detail = () =>
     import ('../components/Detail/Detail.vue')
     // import Home from '../page/Home/Home.vue'
     // import Bug from '../page/Home/Bug/Bug.vue'
-    // import Think from '../page/Home/Think/Think.vue'
-    // import Edit from '../page/Edit/Edit.vue'
-    // import Example from '../page/Home/Example/Example.vue'
+import Think from '../page/Home/Think/Think.vue'
+// import Edit from '../page/Edit/Edit.vue'
+// import Example from '../page/Home/Example/Example.vue'
 Vue.use(VueRouter)
 
 

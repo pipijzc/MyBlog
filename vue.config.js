@@ -23,7 +23,10 @@ module.exports = {
                 config.set('externals', {
                     vue: 'Vue',
                     'element-ui': 'ElementUI',
+                    'highlight.js': 'hljs',
+                    // 'vue-quill-editor': 'VueQuillEditor'
                     // 'vue-quill-editor': 'quillEditor'
+                    // 'vue-particles': 'particles'
                 })
             })
             //开发模式

@@ -65,11 +65,6 @@
   </div>
 </template>
 
-
-
-  </div>
-</template>
-
 <script >
 import { mapState } from "vuex";
 import LeftList from "../../../components/LeftList/LeftList";
@@ -96,7 +91,7 @@ export default {
   },
   methods: {
     jumpWeb() {
-      window.open("https://github.com/pipijzc/git-demo");
+      window.open("https://github.com/pipijzc");
     },
     openLink(sel){
       if (sel =='wechat') {

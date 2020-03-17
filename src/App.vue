@@ -1,19 +1,22 @@
 <template>
   <div id="app">
-    <Header></Header>
+           <Header></Header>
     <router-view></router-view>
+    <!-- <Footer></Footer> -->
   </div>
 </template>
 
 <script>
 import Header from "./components/Header/Header.vue";
+// import Footer from './components/Footer/Footer'
 export default {
   mounted() {
     this.$store.dispatch("isLogin");
    
   },
   components: {
-    Header
+    Header,
+    
   },
   created() {
       // 初始化小猫
@@ -40,6 +43,8 @@ export default {
   width: 100%;
   height: 100%;
 }
+
+
 /* //公共标签 */
 .ui.label {
   border-color: #97dffd;
@@ -55,6 +60,7 @@ export default {
   padding: 7px 11.2px 7px 32px;
   display: inline-block;
   color: #fff;
+  z-index: 4;
 }
 .ui.label::after {
   position: absolute;

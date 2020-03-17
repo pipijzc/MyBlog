@@ -4,5 +4,6 @@ export default {
     // 登录信息
     userinfo: {},
     str: "",
-    strs: []
+    strs: [],
+    isInput: false
 }

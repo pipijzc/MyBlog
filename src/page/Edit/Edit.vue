@@ -4,24 +4,35 @@
       <el-col :span="10">
         <!-- 富文本编辑器 -->
         <!-- 标题 -->
-        <el-input class="inputTitle" type="text" placeholder="写标题啦" v-model="contents.title" maxlength="30" show-word-limit
+        <el-input
+          class="inputTitle"
+          type="text"
+          placeholder="写标题啦"
+          v-model="contents.title"
+          maxlength="30"
+          show-word-limit
         ></el-input>
         <!-- 作者 -->
         <el-input
-          class="inputAuthor" type="text" placeholder="作者" v-model="contents.author" maxlength="5" show-word-limit
+          class="inputAuthor"
+          type="text"
+          placeholder="作者"
+          v-model="contents.author"
+          maxlength="5"
+          show-word-limit
         ></el-input>
         <!-- 时间 -->
         <el-input class="inputTime" type="text" placeholder="时间" v-model="contents.date"></el-input>
-          <!-- 简介 -->
-         <!-- <el-input class="inputintroduct" type="text" placeholder="简介" v-model="contents.author"></el-input> -->
-         <quill-editor
-            v-model="contents.introduct"
-            ref="myQuillEditor"
-            :options="editorOption"
-            @blur="onEditorBlur($event)"
-            @focus="onEditorFocus($event)"
-            @change="onEditorChange($event)"
-          ></quill-editor>
+        <!-- 简介 -->
+        <!-- <el-input class="inputintroduct" type="text" placeholder="简介" v-model="contents.author"></el-input> -->
+        <quill-editor
+          v-model="contents.introduct"
+          ref="myQuillEditor"
+          :options="editorOption"
+          @blur="onEditorBlur($event)"
+          @focus="onEditorFocus($event)"
+          @change="onEditorChange($event)"
+        ></quill-editor>
 
         <div class="edit_container ql-editor">
           <quill-editor
@@ -73,7 +84,10 @@
       </el-col>
       <el-col :span="10">
         <!-- 展示区域 -->
-        <el-card class="editShowBox" v-if="contents.title || contents.content || contents.introduct">
+        <el-card
+          class="editShowBox"
+          v-if="contents.title || contents.content || contents.introduct"
+        >
           <div class="ql-snow ql-container">
             <div class="ql-editor">
               <div v-html="contents.title" class="titelbox"></div>
@@ -82,7 +96,7 @@
                 <span>时间:{{contents.date}}</span>
               </div>
               <div v-html="contents.introduct"></div>
-              <div v-html="contents.content"></div>
+              <code class="hljs" v-html="contents.content"></code>
             </div>
           </div>
         </el-card>
@@ -103,6 +117,8 @@
 <script>
 import { Quill } from "vue-quill-editor";
 import { quillEditor } from "vue-quill-editor";
+// import hljs from 'highlight.js'
+
 
 import { container, ImageExtend, QuillWatch } from "quill-image-extend-module";
 Quill.register("modules/ImageExtend", ImageExtend);
@@ -125,7 +141,7 @@ export default {
         title: "",
         author: "",
         date: "",
-        introduct:""
+        introduct: ""
       },
       // 选择器
       options: [
@@ -183,8 +199,12 @@ export default {
             handlers: {
               image: function() {
                 QuillWatch.emit(this.quill.id);
-              }
+              },
+      
             }
+          },
+          syntax: {
+          highlight: text => hljs.highlightAuto(text).value
           }
         }
       }
@@ -196,10 +216,10 @@ export default {
     },
     ...mapState(["userinfo"])
   },
-  components: {
-    // 注册编辑器组件
-    quillEditor
-  },
+  // components: {
+  //   // 注册编辑器组件
+  //   quillEditor
+  // },
   mounted() {
     this.findArticle();
   },
@@ -259,7 +279,7 @@ export default {
     // 查询文章
     async findArticle() {
       // 读取文章数据
-      const result = await readData('');
+      const result = await readData("");
 
       if (result) {
         this.articles = result;

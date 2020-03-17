@@ -7,12 +7,16 @@
           <el-menu-item index="/home/bug" @click="ToggleToBug">Bug的解决思路</el-menu-item>
           <el-menu-item index="/home/note" @click="ToggleToNote">杂项</el-menu-item>
           <el-menu-item index="/home/js" @click="ToggleToJs">Js笔记</el-menu-item>
-        <el-menu-item index="/home/example"  @click="ToggleToexample">小案例</el-menu-item>
+        <el-menu-item index="/home/example"  @click="ToggleToexample">案例</el-menu-item>
 
         </el-submenu>
         <el-menu-item index="/home/think">一些想法</el-menu-item>
         <el-menu-item index="/edit/999"   @click="openEdit">{{userinfo.data? userinfo.data+'/编辑': '登录/编辑' }}</el-menu-item>
         <el-menu-item index="/home/about">关于</el-menu-item>
+        <div class="input">
+          <input type="text" v-model="word" placeholder="请输入关键字">
+          <el-button round size="mini" class="searchbutton" type="primary" icon="el-icon-search" @click="keySearch">搜索</el-button>
+        </div>
       </el-menu>
 
        <!-- 登录框 -->
@@ -37,11 +41,14 @@
 <script>
 import { mapState } from "vuex";
 import { reqLogin} from "../../ajax/ajax";
-
+import { Search } from '../../ajax/ajax'
 export default {
   data() {
     return {
       loginVisible: false,
+     
+      isInput:false,
+      high:'',
       LoginForm: {
         username: "",
         password: ""
@@ -68,14 +75,63 @@ export default {
             trigger: "blur"
           }
         ]
-      }
+      },
+      word:''
     }
   },
    computed: {
-    ...mapState([ "userinfo"]),
+    ...mapState([ "userinfo","strs"])
     
   },
+  watch:{
+    strs(){
+      this.$nextTick(()=>{
+        // 当strs的数据发生变化时，且数据已经渲染到页面时，获取文档的长度
+        this.high = document.documentElement.scrollHeight
+      
+        // console.log(this.high);
+      })
+      // 判断：当数组长度为0，且处于输入状态时，显示警告
+      if (this.strs.length ==0 && this.isInput === true) {
+          this.$message({
+           message: '暂时找不到这篇文章哦,两秒后返回~',
+           type: 'warning',
+            customClass:'mzindex'
+         })
+         var that = this;
+         //  把定时器挂载到vue实例对象中
+         this.timer = setTimeout(function(){
+            // 定时器函数的指向是window全局对象，而不是vue实例，所以需要用that指代
+          that.timer = null;
+          // 强制刷新当前路由
+          that.$router.go(0)
+         },2000)   
+      } 
+    },
+    word(){
+      if(this.word == '') {
+          // 重置输入状态
+        this.isInput = false;
+        // 返回首页
+        this.$router.go(0)
+         document.documentElement.scrollTop = 0
+      }
+    
+    }
+  },
   methods: {
+   async keySearch(){
+     if (this.word) {
+      //  把输入状态置为true
+       this.isInput = true
+       this.$store.dispatch('getIsInput',true)
+      //  查询数据
+      this.$store.dispatch('getSearch',this.word)
+      // 把页面往下移动
+      document.documentElement.scrollTop = 1400
+       }
+     },
+  
      // 编辑对话框显示内容的判断
     openEdit() {
       
@@ -159,13 +215,38 @@ export default {
 </script>
 
 <style scoped>
+.mzindex{
+  z-index: 9999999!important;
+}
 .el-menu {
   position: fixed;
-  z-index: 4;
+  z-index: 9;
   width: 100%;
   height: 60px!important;
   line-height: 60px;
   top: 0;
   opacity: 0.8;
+  padding-left: 10%;
+}
+.input{
+  float: right;
+  margin-right: 22%;
+  border: 0;
+  outline: 0;
+}
+.input>input {
+  outline: 0;
+  border: 1px solid #999;
+  height: 20px;
+  padding-left: 10px;
+  border-radius: 20px;
+}
+.searchbutton{
+  margin-left: 10px;
+  background-color: #97e09c;
+  border: 0;
+}
+.searchbutton:hover{
+  background-color: #48456d;
 }
 </style>

@@ -27,3 +27,5 @@ export const GetStar = () => ajax(base_url + '/getstar')
 export const Addmore = () => ajax(base_url + '/addmore')
     // 获取最新
 export const Getnew = () => ajax(base_url + '/getnew')
+
+export const Search = (word) => ajax(base_url + '/search', { word })

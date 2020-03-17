@@ -3,7 +3,8 @@
     <!-- 大图 -->
     <el-container>
       <el-header height="300px">
-        <div class="block1">
+        
+        <div class="block1" ref="topBox">
           <!-- <el-image src="../../images/timg.jpg"></el-image> -->
           <img src="../../images/beautiful.jpg" alt="灯塔" class="toppic" />
           <div class="animated flipInX">
@@ -28,23 +29,29 @@
         </div>
       </el-header>
     </el-container>
-
     <!-- 内容占位 -->
     <router-view></router-view>
+    
+    <Footer></Footer>
   </div>
 </template>
 
 <script >
 import { mapState } from "vuex";
 import { Typeit } from "../../utils/plug";
+import Footer from '../../components/Footer/Footer'
+
 export default {
   data() {
     return {
       townpic: require("../../images/timg (2)_看图王.jpg")
     };
   },
+  components:{
+    Footer
+  },
   computed: {
-    ...mapState(["userinfo"])
+    ...mapState(["userinfo","strs"])
   },
   methods: {
     hoverimg() {
@@ -62,6 +69,13 @@ export default {
     '$route':function(to,from){
       console.log(this.$route); 
       document.documentElement.scrollTop = 0
+    },
+    strs(){
+        this.$nextTick(()=>{
+            var topbox = this.$refs.topBox.offsetHeight;
+        console.log(topbox);
+      })
+    
     }
   }
 };

@@ -1,4 +1,4 @@
-import { RECEIVE_LIST, IS_LOGIN, READ_DATA, ADD_MORE } from './mutation-type'
+import { RECEIVE_LIST, IS_LOGIN, READ_DATA, ADD_MORE, GET_SRARCH, IS_INPUT } from './mutation-type'
 import Vue from 'vue'
 
 export default {
@@ -16,5 +16,11 @@ export default {
         strss.forEach(item => {
             state.strs.push(item)
         })
+    },
+    [GET_SRARCH](state, { strs }) {
+        state.strs = strs
+    },
+    [IS_INPUT](state, { isInput }) {
+        state.isInput = isInput
     }
 }

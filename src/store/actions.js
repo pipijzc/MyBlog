@@ -3,14 +3,18 @@ import {
     RECEIVE_LIST,
     IS_LOGIN,
     READ_DATA,
-    ADD_MORE
+    ADD_MORE,
+    GET_SRARCH,
+    IS_INPUT
+
 } from './mutation-type'
 
 import {
     reqList,
     reqIsLogin,
     readData,
-    Addmore
+    Addmore,
+    Search
 } from '../ajax/ajax'
 
 export default {
@@ -39,6 +43,16 @@ export default {
         const strss = await Addmore();
         // console.log(strss)
         commit(ADD_MORE, { strss })
+    },
+    async getSearch({ commit }, word) {
+        const strs = await Search(word);
+        // console.log(strs);
+        commit(GET_SRARCH, { strs })
+    },
+    getIsInput({ commit }, isInput) {
+        // console.log(isInput);
+        // state.isInput = isInput
+        commit(IS_INPUT, { isInput })
     }
 
 }

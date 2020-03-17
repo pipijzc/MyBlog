@@ -17,7 +17,8 @@
             <i class="el-icon-time"></i>
             <span>时间:{{newResult.date? newResult.date:'猴年马月'}}</span>
           </div>
-          <div v-html="newResult.str" class="maincontent"></div>
+           <code class="hljs maincontent" v-html="newResult.str"></code>
+          <!-- <div v-html="newResult.str" class="maincontent"></div> -->
         </div>
       </div>
     </el-card>
