@@ -5,13 +5,16 @@
         </div>
         <div class="fcontainer">
             <p>
+                你看不到我，躲起来(つд⊂)
+            </p>
+            <p>
                 博客已偷偷运行<span >{{longTime}}</span><span class="timeJump">🚀🚀</span>
             </p>
             <p>
                 奔跑于<a href="https://www.aliyun.com/?spm=a2c49.11131515.0.0.5Z9AkR" target="_blank">阿里云</a>服务器.   源码<a href="https://github.com/pipijzc" target="_blank">Github</a>
             </p>
             <p>
-                © 2020 <a href="#">Vector-blog</a>. 由 <a href="https://cn.vuejs.org/" target="_blank">Vue</a> 强力驱动. <a href="http://beian.miit.gov.cn/" target="_blank">粤ICP备20016927号-1</a> 
+                © 2020 <a href="#">Vector-Blog</a>. 由 <a href="https://cn.vuejs.org/" target="_blank">Vue</a> 强力驱动. <a href="http://beian.miit.gov.cn/" target="_blank">粤ICP备20016927号-1</a> 
             </p>
             <p>
                 <span>Made </span><span>by Vector.</span>
@@ -104,12 +107,7 @@
     margin:0;
 
 }
-.footBackHui .fcontainer{
-    /*z-index: 1;*/
-    /*position: absolute;*/
-    /*bottom:0;*/
 
-}
 .footBack p{
     margin:5px 0;
     z-index: 3;

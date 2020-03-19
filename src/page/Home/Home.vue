@@ -31,7 +31,7 @@
     </el-container>
     <!-- 内容占位 -->
     <router-view></router-view>
-    
+
     <Footer></Footer>
   </div>
 </template>
@@ -67,13 +67,13 @@ export default {
   // 监听路由参数的变化
    watch:{
     '$route':function(to,from){
-      console.log(this.$route); 
+      // console.log(this.$route); 
       document.documentElement.scrollTop = 0
     },
     strs(){
         this.$nextTick(()=>{
             var topbox = this.$refs.topBox.offsetHeight;
-        console.log(topbox);
+        // console.log(topbox);
       })
     
     }
@@ -133,7 +133,7 @@ span {
 
 .toppic {
   width: 100%;
-  height: 600px;
+  height: 620px;
 }
 .el-header {
   padding: 0;

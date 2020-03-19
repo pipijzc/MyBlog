@@ -79,6 +79,7 @@ export default {
 .ui.label a {
   color: #fff;
   line-height: 100%;
+  /* font-weight: 500; */
 }
 .s-round-date {
   position: absolute;

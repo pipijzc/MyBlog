@@ -32,6 +32,7 @@ export default {
     ...mapState(["strs"])
   },
   mounted() {
+    this.$store.state.strs = ""
     this.$store.dispatch("readData", "think");
   }
 };

@@ -14,6 +14,8 @@ const All = () =>
     //     import ('../page/Home/Think/Think.vue')
 const Detail = () =>
     import ('../components/Detail/Detail.vue')
+const Login = () =>
+    import ('../page/Login/Login.vue')
     // import Home from '../page/Home/Home.vue'
     // import Bug from '../page/Home/Bug/Bug.vue'
 import Think from '../page/Home/Think/Think.vue'
@@ -39,11 +41,23 @@ const router = new VueRouter({
         {
             path: '/edit',
             component: Edit,
+            beforeEnter: (to, from, next) => {
+                // ...
+                if (store.state.userinfo.data) {
+                    next()
+                } else {
+                    next('/')
+                }
+            }
 
         },
         {
             path: '/detail',
             component: Detail
+        },
+        {
+            path: '/login',
+            component: Login
         }
     ]
 })

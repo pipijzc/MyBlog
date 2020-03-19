@@ -87,7 +87,7 @@ export default {
 
     newstrs(){
       const {strs} = this
-      console.log(strs);
+      // console.log(strs);
       
       strs.forEach(item=>{
           if (item.category == 'note') {
