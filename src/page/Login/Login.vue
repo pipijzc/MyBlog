@@ -28,7 +28,6 @@
 
 <script>
 import { reqLogin} from "../../ajax/ajax";
-import { mapState } from "vuex";
 export default {
   data() {
     return {
@@ -71,15 +70,19 @@ export default {
             this.LoginForm.username,
             this.LoginForm.password
           );
+          // console.log(result);
+          
           if (result.code == 200) {
             //  登录成功
             this.$message({
               message: "成功啦o(∩_∩)o ",
               type: "success"
             });
-            this.$store.dispatch('isLogin')
+            const token = result.token
+            this.$store.dispatch('getTokens',token)
+            // this.$store.dispatch('isLogin')
             //  路由跳转
-            this.$router.push("/");
+            this.$router.push("/edit");
           } 
           else {
             //  登录失败
@@ -98,9 +101,7 @@ export default {
       this.$refs.LoginFormRef.resetFields();
     },
   },
-  computed:{
-      ...mapState(['userinfo'])
-  }
+
 };
 </script>
 

@@ -10,17 +10,21 @@ const Edit = () =>
     import ('../page/Edit/Edit.vue')
 const All = () =>
     import ('../page/Home/All/All.vue')
-    // const Think = () =>
-    //     import ('../page/Home/Think/Think.vue')
+
 const Detail = () =>
     import ('../components/Detail/Detail.vue')
 const Login = () =>
     import ('../page/Login/Login.vue')
-    // import Home from '../page/Home/Home.vue'
-    // import Bug from '../page/Home/Bug/Bug.vue'
+const FriendMessage = () =>
+    import ('../page/Home/FriendMessage/FriendMessage.vue')
+const Replay = () =>
+    import ('../page/Edit/Replay/Replay.vue')
+
+const Music = () =>
+    import ('../page/Home/music/Music.vue')
+
 import Think from '../page/Home/Think/Think.vue'
-// import Edit from '../page/Edit/Edit.vue'
-// import Example from '../page/Home/Example/Example.vue'
+
 Vue.use(VueRouter)
 
 
@@ -29,12 +33,18 @@ const router = new VueRouter({
             path: '/home',
             component: Home,
             children: [
-                { path: '/home/bug', component: Bug },
-                { path: '/home/note', component: Bug },
-                { path: '/home/js', component: Bug },
-                { path: '/home/example', component: Bug },
-                { path: '/home/think', component: Think },
-                { path: '/home/all', component: All },
+                { path: '/home/bug', component: Bug, },
+                { path: '/home/note', component: Bug, },
+                { path: '/home/js', component: Bug, },
+                { path: '/home/example', component: Bug, },
+                { path: '/home/daily', component: Bug, },
+                { path: '/home/think', component: Think, },
+                { path: '/home/all', component: All, },
+                { path: '/home/friendmessage', component: FriendMessage, },
+                {
+                    path: '/home/music',
+                    component: Music
+                }
             ]
         },
         { path: '/', redirect: '/home/all' },
@@ -42,14 +52,26 @@ const router = new VueRouter({
             path: '/edit',
             component: Edit,
             beforeEnter: (to, from, next) => {
-                // ...
-                if (store.state.userinfo.data) {
+                let token = localStorage.getItem('Authorization')
+                if (token) {
                     next()
                 } else {
                     next('/')
                 }
             }
+        },
+        {
+            path: '/edit/replay',
+            component: Replay,
+            beforeEnter: (to, from, next) => {
+                let token = localStorage.getItem('Authorization')
 
+                if (token) {
+                    next()
+                } else {
+                    next('/')
+                }
+            }
         },
         {
             path: '/detail',
@@ -58,7 +80,8 @@ const router = new VueRouter({
         {
             path: '/login',
             component: Login
-        }
+        },
+
     ]
 })
 

@@ -1,7 +1,10 @@
 <template>
   <div>
+      <keep-alive>
+        <!-- <Music></Music> -->
 
-    <div  v-for="(item,index) in newstrs" :key="index" >
+      </keep-alive>
+        <div  v-for="(item,index) in newstrs" :key="index" >
     <el-card class="box-card" shadow="hover" >  
       <div class="ui label">
         <a style="cursor: pointer;" @click="jump(item.category)">{{item.category}}</a>
@@ -21,7 +24,7 @@
           </div>
           <div v-html="item.introduct" class="maincontent"></div>
         </div>
-          <div class="viewdetail">
+          <div class="viewdetail" v-if="item.showDetail!=='no'">
                 <a class="tcolors-bg" :href="'#/detail?id='+ item._id" target="_blank">
                     阅读全文>>
                 </a>
@@ -29,6 +32,9 @@
       </div>
     </el-card>
     </div>
+  
+   
+    
     <!-- 显示更多 -->
     <el-col class="viewmore">
             <a  v-show="hasMore" ref="getdata" class="tcolors-bg" href="javascript:void(0);" @click="addMoreFun">点击加载更多</a>
@@ -40,12 +46,16 @@
 <script>
 import { mapState } from "vuex";
 import { Addmore } from '../../ajax/ajax'
+
 export default {
   data() {
     return {
       hasMore:true,
   
     };
+  },
+  components:{
+    
   },
   methods: {
     // 点击显示更多
@@ -69,8 +79,8 @@ export default {
         this.$router.push('/home/example');
         break;
 
-        case 'Bug思路': 
-        this.$store.dispatch('readData','bug')
+        case '生活随笔': 
+        this.$store.dispatch('readData','daily')
         this.$router.push('/home/bug');
         break;
       }
@@ -89,7 +99,7 @@ export default {
       const {strs} = this
       // console.log(strs);
       
-      strs.forEach(item=>{
+      strs.data.forEach(item=>{
           if (item.category == 'note') {
             item.category = '杂项'
           } else if (item.category =='js') {
@@ -98,18 +108,20 @@ export default {
             item.category= '案例'
           } else if (item.category == 'bug') {
             item.category = 'Bug思路'
+          } else if (item.category == 'daily') {
+            item.category = '生活随笔'
           } 
       })
-      return strs
+      return strs.data
     }
   },
   watch:{
     // 监听state数据中strs的变化
-    strs(){
-      // console.log(this.strs.length); 
-        if (this.strs.length % 5 !== 0 || this.$store.state.isInput) {
-        this.hasMore = false
-      } 
+   'strs.moreData':{
+    handler(newValue,oldValue){
+      this.hasMore = this.strs.moreData
+		}
+      
      
     }
   }
@@ -117,11 +129,41 @@ export default {
 </script>
 
 <style scoped>
+@media screen and (max-width: 1200px) {
+  .box-card {
+    margin-top: 69px!important;
+  }
+}
+@media screen and (max-width: 500px) {
+ .box-card {
+   border-radius: 10px!important;
+ }
+}
+@media screen and (max-width: 690px) {
+  .box-card {
+    margin-top: 30px!important;
+  }
+  .titleBox{
+    margin-top: 17px;
+    font-size: 16px!important;
+  }
+  .viewmore a {
+    margin-top: 20px!important;
+  }
+   .authorinfo {
+  font-size: 14px!important;
+  margin-top: 12px!important;
+  margin-bottom: 14px!important;
+}
+}
+
+
+
 .box-card {
 
   position: relative;
   border-radius: 20px;
-  margin-top: 150px;
+  margin-top: 170px;
 }
 .titleBox {
   font-size: 20px;
@@ -154,8 +196,8 @@ a {
     text-align: center;
     font-size: 14px;
     color:#fff;
-    height:30px;
-    line-height: 30px;
+    height:42px;
+    line-height: 29px;
     display: block;
     margin-top: 10px;
 }

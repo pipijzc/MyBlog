@@ -398,7 +398,7 @@ const Typeit = (emId) => {
         speech：所有的speech。
      ***/
     // if (isAimee != 0) {
-    var world = "Vector";
+    var world = "";
     // }
     theater.describe("Luke", .9, emId);
     // conosle.log()
@@ -419,7 +419,7 @@ const Typeit = (emId) => {
     theater
         .write("Luke:Loading..", 1000)
         //                .write("Vader:I am your father.", toggleClass)
-        .write("Luke:Hello~" + world, 500)
+        .write("Luke:Remember Your Road" + world, 500)
         .write({ name: "call", args: [kill, true] })
         .write(function() { theater.play(true); });
 

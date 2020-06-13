@@ -1,5 +1,11 @@
 <template>
   <div>
+    <el-breadcrumb separator="/" class="nav">
+  <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+  <el-breadcrumb-item :to="{ path: '/edit' }">文章操作</el-breadcrumb-item>
+  <el-breadcrumb-item :to="{ path: '/edit/replay' }">留言和友链</el-breadcrumb-item>
+  <el-breadcrumb-item >待定</el-breadcrumb-item>
+</el-breadcrumb>
     <el-row :gutter="20">
       <el-col :span="10">
         <!-- 富文本编辑器 -->
@@ -43,15 +49,25 @@
             @focus="onEditorFocus($event)"
             @change="onEditorChange($event)"
           ></quill-editor>
-          <!-- 保存按钮 -->
+         
+        </div>
+         <!-- 保存按钮 -->
           <el-button type="primary" style="margin-top:30px; cursor: pointer" @click="saveHtml">保存</el-button>
           <!-- 选择器 -->
-          <el-select v-model="value" placeholder="请选择">
+          <el-select v-model="value" placeholder="请选择分类">
             <el-option
               v-for="item in options"
               :key="item.value"
               :label="item.label"
               :value="item.value"
+            ></el-option>
+          </el-select>
+           <el-select v-model="values" placeholder="是否显示阅读原文">
+            <el-option
+              v-for="item in isShowMoreOptions"
+              :key="item.values"
+              :label="item.label"
+              :value="item.values"
             ></el-option>
           </el-select>
           <!-- 清空按钮 -->
@@ -60,7 +76,6 @@
             style="float:right; margin-top:30px;   cursor: pointer"
             @click="deleteVisible = true"
           >清空</el-button>
-        </div>
         <el-card shadow="hover" class="box-card" v-for="(article,index) in articles" :key="index">
           <!-- 编辑和删除 -->
           <div slot="header" class="clearfix">
@@ -126,7 +141,7 @@ import { mapState } from "vuex";
 
 import {
   uploadContent,
-  readData,
+  adminReadData,
   deleData,
   editData,
   modifyData
@@ -158,8 +173,8 @@ export default {
           label: "笔记/js笔记"
         },
         {
-          value: "pic",
-          label: "图片"
+          value: "daily",
+          label: "生活随笔"
         },
         {
           value: "example",
@@ -170,8 +185,16 @@ export default {
           label: "一些想法"
         }
       ],
+      isShowMoreOptions:[{
+        values:'',
+        label:'是'
+      },{
+        values:'no',
+        label:'否'
+      }],
       // 选中的值
       value: "",
+      values:'',
       // 获取的文章数据数组
       articles: [],
       // 判断处于删除还是添加操作
@@ -188,9 +211,8 @@ export default {
           ImageExtend: {
             loading: true,
             name: "jpg",
-            action: "http://127.0.0.1:4000/uploadpic",
+            action: "http://vectorjzc.top/uploadpic",
             response: res => {
-              // console.log(res.content);
               return res.content;
             }
           },
@@ -235,7 +257,7 @@ export default {
     saveHtml: async function(event) {
       // 先判断是编辑状态还是添加状态
       if (this.isEdit) {
-        const result = await modifyData(this.contents, this.editId, this.value);
+        const result = await modifyData(this.contents, this.editId, this.value,this.values);
         if (result.code == 200) {
           this.$message({
             message: "修改成功",
@@ -250,6 +272,7 @@ export default {
           this.contents.date = "";
           this.contents.introduct = "";
           this.value = "";
+          this.values = ''
         } else {
           this.$message({
             message: "修改失败",
@@ -259,7 +282,7 @@ export default {
         // 重置判断是否为编辑的状态
         this.isEdit = false;
       } else {
-        const result = await uploadContent(this.contents, this.value);
+        const result = await uploadContent(this.contents, this.value,this.values);
         if (result.code == 200) {
           this.$message({
             message: "添加成功",
@@ -267,7 +290,7 @@ export default {
           });
           this.contents.content = "";
           this.contents.title = "";
-          this.$router.push("/home/bug");
+          this.$router.go(0);
         } else {
           this.$message({
             message: "添加失败",
@@ -279,7 +302,7 @@ export default {
     // 查询文章
     async findArticle() {
       // 读取文章数据
-      const result = await readData("");
+      const result = await adminReadData();
 
       if (result) {
         this.articles = result;
@@ -308,6 +331,7 @@ export default {
       this.contents.introduct = result.introduct;
       // 获取分类
       this.value = result.category;
+      this.values = result.showDetail
       // 变更为编辑状态，为提交做准备
       this.isEdit = true;
       // 把这篇文章的id值赋一个变量，当编辑完成提交时发给服务器端，从而在数据库中查到这篇文章
@@ -381,7 +405,7 @@ export default {
 }
 .el-col {
   margin-left: 60px;
-  margin-top: 100px;
+  margin-top: 34px;
 }
 .titelbox {
   font-size: 20px;
@@ -399,5 +423,15 @@ img {
 }
 .el-select {
   margin-left: 28% !important;
+}
+.nav{
+      margin-top: 92px;
+    margin-left: 63px;
+}
+.ql-editor{
+height: 500px!important;
+}
+.ql-container{
+height: 500px!important; 
 }
 </style>

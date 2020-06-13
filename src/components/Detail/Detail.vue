@@ -1,6 +1,8 @@
 <template>
     <div>
-      <el-card class="box-card"  shadow="hover">
+      <el-row>
+        <el-col :xs="24"  :sm="{span:20,offset:2}"  :md="{span:20,offset:2}" :lg="{span:20,offset:2}"  :xl="{span:14,offset:5}">
+           <el-card class="box-card"  shadow="hover">
       <div class="ui label">
         <a>{{newResult.category}}</a>
       </div>
@@ -22,6 +24,9 @@
         </div>
       </div>
     </el-card>
+        </el-col>
+      </el-row>
+     
 
     <Scroll :imageSrc="require('../../images/scroll.png')"></Scroll>
 
@@ -74,10 +79,15 @@ import Scroll from '../../components/Scroll/Scroll'
 <style scoped>
 .box-card {
   position: relative;
-  width: 70%;
+  width: 100%;
   margin: 0 auto;
+  /* padding: 10px; */
   border-radius: 20px;
   margin-top: 150px;
+  font-size: 14px!important;
+}
+.el-col{
+  padding: 0 10px;
 }
 .titleBox {
   font-size: 20px;
@@ -91,6 +101,16 @@ import Scroll from '../../components/Scroll/Scroll'
 .authorinfo > span {
   margin-right: 15px;
 }
+@media screen and (max-width: 690px) {
+   .titleBox{
+    margin-top: 37px;
+    font-size: 16px!important;
+  }
+  .authorinfo {
+  font-size: 14px!important;
+}
+}
+
 .ql-container.ql-snow {
   border: 0;
 }

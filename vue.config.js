@@ -1,3 +1,5 @@
+const webpack = require('webpack')
+var isPro = process.env.NODE_ENV === 'production'
 module.exports = {
     lintOnSave: false,
     productionSourceMap: false,
@@ -23,11 +25,8 @@ module.exports = {
                     //使用externals设置排除项
                 config.set('externals', {
                     vue: 'Vue',
-                    'element-ui': 'ElementUI',
+                    'element-ui': 'ELEMENT',
                     'highlight.js': 'hljs',
-                    // 'vue-quill-editor': 'VueQuillEditor'
-                    // 'vue-quill-editor': 'quillEditor'
-                    // 'vue-particles': 'particles'
                 })
             })
             //开发模式

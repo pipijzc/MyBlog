@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-import { Button, Menu, MenuItem, Submenu, MenuItemGroup, Container, Aside, Main, Header, Carousel, CarouselItem, Image, Row, Col, Avatar, Card, Dialog, Form, FormItem, Input, Message, Select, Option, Tooltip } from 'element-ui'
+import { Button, Menu, MenuItem, Submenu, MenuItemGroup, Container, Aside, Main, Header, Carousel, CarouselItem, Image, Row, Col, Avatar, Card, Dialog, Form, FormItem, Input, Message, Select, Option, Tooltip, Breadcrumb, BreadcrumbItem, Upload } from 'element-ui'
 
 Vue.use(Button)
 Vue.use(Menu)
@@ -25,6 +25,9 @@ Vue.use(Input)
 Vue.use(Select)
 Vue.use(Option)
 Vue.use(Tooltip)
+Vue.use(Breadcrumb)
+Vue.use(BreadcrumbItem)
+Vue.use(Upload)
     // Vue.use(MessageBox)
     // 不能用use
     // Vue.use(Message)

@@ -1,9 +1,12 @@
 export default {
-    // 列表
-    list: {},
+
     // 登录信息
     userinfo: {},
+    Authorization: localStorage.getItem('Authorization') ? localStorage.getItem('Authorization') : '',
     str: "",
-    strs: [],
+    strs: {
+        data: [],
+        moreData: true
+    },
     isInput: false
 }

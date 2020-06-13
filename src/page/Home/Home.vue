@@ -1,13 +1,13 @@
 <template>
   <div>
     <!-- 大图 -->
-    <el-container>
-      <el-header height="300px">
-        
+    <el-row>
+      <el-col :xs="24">
+      <el-header height="300px">      
         <div class="block1" ref="topBox">
           <!-- <el-image src="../../images/timg.jpg"></el-image> -->
           <img src="../../images/beautiful.jpg" alt="灯塔" class="toppic" />
-          <div class="animated flipInX">
+          <div class=" flipInX">
             <div class="boxbox">
               <img
                 ref="townpics"
@@ -17,7 +17,7 @@
                 @mouseleave="  townpic = require('../../images/timg (2)_看图王.jpg')"
                 class="townpic"
               />
-              <span>愿如灯塔般，即便无所依靠，风吹雨打，仍旧屹立不倒，照亮一方!</span>
+              <span class="townWord">愿如灯塔般，即便无所依靠，风吹雨打，仍旧屹立不倒，照亮一方!</span>
             </div>
           </div>
           <!-- 打字机 -->
@@ -28,7 +28,9 @@
           </div>
         </div>
       </el-header>
-    </el-container>
+      </el-col>
+    </el-row>
+   
     <!-- 内容占位 -->
     <router-view></router-view>
 
@@ -83,10 +85,11 @@ export default {
 
 <style scoped>
 /* 导入动画样式 */
-@import "../../animate/animate.css";
+
 @import '../../public/sigmar.css';
 .block1 {
   position: relative;
+  /* top: 0; */
 }
 
 .town {
@@ -134,9 +137,24 @@ span {
 .toppic {
   width: 100%;
   height: 620px;
+  vertical-align: top;
 }
 .el-header {
   padding: 0;
+}
+@media screen and (max-width: 500px) {
+    .boxbox {
+      width: 0px!important;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .scene{
+    font-size: 48px!important;
+  }
+  .townWord{
+    display: none;
+  }
 }
 .scene {
 	width: 100%;

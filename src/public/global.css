@@ -1,20 +1,61 @@
 body {
     background-color: #f0f5f7;
-    min-width: 1300px;
+    /* min-width: 1300px; */
+    margin: 0;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+p {
+    margin: 0;
+}
 
-/* .el-card {
-    z-index: 2!important;
-} */
+html {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
 
-.ql-editor .maincontent p>img,
-.el-image__inner {
+.ql-editor .maincontent p>img {
     display: block!important;
-    width: 95%!important;
+    max-width: 90%!important;
     border-radius: 20px!important;
     margin: 0 auto!important;
     box-shadow: 2px -1px 8px rgba(0, 0, 0, 0.2)!important;
+}
+
+.ql-editor {
+    line-height: 1.9!important;
+}
+
+.ql-container {
+    font-size: 11px!important;
+}
+
+.el-image__inner {
+    display: block!important;
+    max-width: 95%!important;
+    border-radius: 20px!important;
+    margin: 0 auto!important;
+    box-shadow: 2px -1px 8px rgba(0, 0, 0, 0.2)!important;
+}
+
+.ql-syntax {
+    font-size: 16px!important;
+}
+
+@media screen and (max-width:500px) {
+    .ql-editor .maincontent p>img,
+    .el-image__inner {
+        border-radius: 10px!important;
+    }
+    .ql-editor .ql-size-large {
+        font-size: 1.2em!important;
+    }
+    .ql-syntax {
+        font-size: 12px!important;
+    }
+    .ql-editor {
+        padding: 12px 0!important;
+    }
 }
 
 .el-dialog {
@@ -29,7 +70,7 @@ body {
 .ql-editor pre {
     border-radius: 15px!important;
     box-shadow: 2px -1px 8px rgba(0, 0, 0, .2)!important;
-    font-size: 14px!important;
+    /* font-size: 14px!important; */
 }
 
 .hljs {
@@ -37,12 +78,22 @@ body {
     /* font-family: Helvetica, Arial, sans-serif!important; */
 }
 
-.ql-editor pre {
-    font-size: 16px!important;
-}
-
-code {
+.ql-snow .ql-editor code {
     font-family: Helvetica, Arial, sans-serif!important;
     font-size: 100%!important;
     /* font-family: Consolas; */
+}
+
+@media screen and (max-width:950px) {
+    .el-submenu__title {
+        height: 40px!important;
+        line-height: 40px!important;
+    }
+}
+
+@media screen and (min-width:951px) {
+    .el-submenu__title {
+        height: 60px!important;
+        line-height: 60px!important;
+    }
 }

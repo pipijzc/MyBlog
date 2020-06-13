@@ -1,7 +1,7 @@
 <template>
   <div class="margin">
-    <el-row class="row" :gutter="20" v-for="(item,index) in newstrs" :key="index">
-      <el-col :span="14" :offset="5">
+    <el-row class="row"  v-for="(item,index) in newstrs" :key="index">
+      <el-col :xs="24"  :sm="{span:20,offset:2}"  :md="{span:20,offset:2}" :lg="{span:16,offset:4}"  :xl="{span:14,offset:5}">
         <el-card class="box-card" shadow="always">
           <div class="ui label">
             <a>{{item.category}}</a>
@@ -22,7 +22,7 @@
               </div>
               <div v-html="item.introduct" class="maincontent"></div>
             </div>
-             <div class="viewdetail">
+             <div class="viewdetail" v-if="item.showDetail!=='no'">
                 <a class="tcolors-bg" :href="'#/detail?id='+ item._id" target="_blank">
                     阅读全文>>
                 </a>
@@ -49,7 +49,7 @@ export default {
     ...mapState(["strs"]),
      newstrs(){
       const {strs} = this
-      strs.forEach(item=>{
+      strs.data.forEach(item=>{
           if (item.category == 'note') {
             item.category = '杂项'
           } else if (item.category =='js') {
@@ -58,9 +58,11 @@ export default {
             item.category= '案例'
           } else if (item.category == 'bug') {
             item.category = 'Bug思路'
+          } else if (item.category == 'daily') {
+            item.category = '生活随笔'
           } 
       })
-      return strs
+      return strs.data
     }
                
   },
@@ -83,6 +85,14 @@ export default {
 .margin {
   margin-top: 470px;
 }
+@media screen and (max-width: 650px) {
+  .row {
+    margin-top: 50px!important;
+  }
+  .titleBox{
+    margin-top: 40px;
+  }
+}
 .row {
   /* position: relative; */
   margin-top: 100px;
@@ -104,7 +114,7 @@ export default {
 
   border-radius: 20px;
   margin-top: 0px;
-  margin-left: -23px;
+  margin-left: 0%;
 }
 .ql-container.ql-snow {
   border: 0;
