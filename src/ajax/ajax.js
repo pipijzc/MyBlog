@@ -1,7 +1,7 @@
 import ajax from './index'
-// const base_url = "/api"
-// const base_url = 'http://47.114.170.251:80'
-const base_url = 'http://vectorjzc.top'
+const base_url = "/api"
+    // const base_url = 'http://47.114.170.251:80'
+    // const base_url = 'http://vectorjzc.top'
 
 // 获取列表
 // export const reqList = () => ajax(base_url + '/list')
